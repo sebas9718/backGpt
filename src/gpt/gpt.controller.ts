@@ -1,6 +1,6 @@
 import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { GptService } from './gpt.service';
-import { OrthographyDto, ProsConsDiscusserDto } from './dtos';
+import { OrthographyDto, ProsConsDiscusserDto, TranslateDto } from './dtos';
 import { Response } from 'express';
 
 @Controller('gpt')
@@ -18,7 +18,7 @@ export class GptController {
   prosConsDicusser(
     @Body() prosCronsDiscusserDto: ProsConsDiscusserDto,
   ) {
-    return this.gptService.prosConsDicusser(prosCronsDiscusserDto)
+    return this.gptService.prosConsDicusser(prosCronsDiscusserDto);
   }
 
   @Post('pros-cons-discusser-stream')
@@ -38,5 +38,12 @@ export class GptController {
     }
 
     res.end();
+  }
+
+  @Post('translate')
+  translate(
+    @Body() translateDto: TranslateDto,
+  ) {
+    return this.gptService.translate(translateDto);
   }
 }
